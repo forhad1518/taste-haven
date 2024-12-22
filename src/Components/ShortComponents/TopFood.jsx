@@ -11,12 +11,7 @@ const TopFood = () => {
                 await axios.get('http://localhost:5000/topfoods')
                     .then(res => setFoods(res.data))
             } catch (err) {
-                try {
-                    await axios.get('https://assignment-11-server-eta-gules.vercel.app/topfoods')
-                        .then(res => setFoods(res.data))
-                } catch (err) {
-                    console.log(err.message); // Catch errors
-                }
+
                 console.log(err.message); // Catch errors
             }
         }
