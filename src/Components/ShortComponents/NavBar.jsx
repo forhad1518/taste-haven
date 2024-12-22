@@ -10,12 +10,12 @@ import { Link, NavLink } from "react-router-dom";
 import { Authcontext } from "../providers/AuthProvider";
 
 const NavBar = () => {
-    const { user } = useContext(Authcontext)
+    const { user, logOut } = useContext(Authcontext)
     console.log(user)
 
     // handle logout
     const handleLogout = () => {
-
+        logOut()
     }
 
 
@@ -81,10 +81,10 @@ const NavBar = () => {
                             user?.email ? <div className="flex items-center gap-x-1">
                                 <div className="w-10 mx-3 rounded-full" title={user?.displayName}>
                                     <img
-                                        
+
                                         className="w-10 rounded-full"
                                         alt={user?.displayName}
-                                        src={user?.photoURL}/>
+                                        src={user?.photoURL} />
                                 </div>
                                 <Button
                                     variant="gradient"
@@ -155,14 +155,24 @@ const NavBar = () => {
                 </div>
                 <MobileNav open={openNav}>
                     {navList}
-                    <div className="flex items-center gap-x-1">
-                        <Button fullWidth variant="text" size="sm" className="">
-                            <Link to='/login'>Log In</Link>
-                        </Button>
-                        <Button fullWidth variant="gradient" size="sm" className="">
-                            <Link to='signin'>Sign in</Link>
-                        </Button>
-                    </div>
+                    {
+                        user?.email ?
+                            <div className="flex items-center gap-x-1">
+                                <Button
+                                    fullWidth variant="gradient" size="sm" className=""
+                                >
+                                    <Link onClick={handleLogout}
+                                    >Log Out</Link>
+                                </Button>
+                            </div> : <div className="flex items-center gap-x-1">
+                                <Button fullWidth variant="text" size="sm" className="">
+                                    <Link to='/login'>Log In</Link>
+                                </Button>
+                                <Button fullWidth variant="gradient" size="sm" className="">
+                                    <Link to='signin'>Sign in</Link>
+                                </Button>
+                            </div>
+                    }
                 </MobileNav>
             </Navbar>
         </div>
