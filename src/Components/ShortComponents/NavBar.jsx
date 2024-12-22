@@ -6,7 +6,7 @@ import {
     Button,
     IconButton,
 } from "@material-tailwind/react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const NavBar = () => {
     const [openNav, setOpenNav] = React.useState(false);
@@ -72,14 +72,16 @@ const NavBar = () => {
                                 size="sm"
                                 className="hidden lg:inline-block"
                             >
-                                <span>Log In</span>
+                                <Link to='/login'
+                                >Log In</Link>
                             </Button>
                             <Button
                                 variant="gradient"
                                 size="sm"
                                 className="hidden lg:inline-block"
                             >
-                                <span>Sign in</span>
+                                <Link to='/signin'
+                                >sign in</Link>
                             </Button>
                         </div>
                         <IconButton
@@ -125,10 +127,10 @@ const NavBar = () => {
                     {navList}
                     <div className="flex items-center gap-x-1">
                         <Button fullWidth variant="text" size="sm" className="">
-                            <span>Log In</span>
+                            <Link to='/login'>Log In</Link>
                         </Button>
                         <Button fullWidth variant="gradient" size="sm" className="">
-                            <span>Sign in</span>
+                            <Link>Sign in</Link>
                         </Button>
                     </div>
                 </MobileNav>
