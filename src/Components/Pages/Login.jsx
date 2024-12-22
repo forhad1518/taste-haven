@@ -1,5 +1,4 @@
-// import { useContext } from "react";
-// import { Authcontext } from "../Provider/AuthProvider";
+import { useContext } from "react";
 import { GoogleAuthProvider } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 import {
@@ -13,37 +12,38 @@ import {
 import Lottie from "lottie-react";
 import groovyWalkAnimation from "../animations/Animation - 1733465167995.json";
 import Swal from "sweetalert2";
+import { Authcontext } from "../providers/AuthProvider";
 
 // Google Provider
 const googleProvider = new GoogleAuthProvider()
 
 const Login = () => {
-    // const { user, setUser, googleSign, loginEmailpass } = useContext(Authcontext);
+    const { user, setUser, googleSign, loginEmailpass } = useContext(Authcontext);
     // Navigate
     const navigate = useNavigate()
     // Handle Google login BTN
-    // const handleGoogleLogin = () => {
-    //     googleSign(googleProvider)
-    //         .then(res => {
-    //             setUser(res.user);
-    //             Swal.fire({
-    //                 position: "center",
-    //                 icon: "success",
-    //                 title: "Welcome, Login Success",
-    //                 showConfirmButton: false,
-    //                 timer: 1500
-    //             });
-    //             navigate('/')
-    //         }).catch(error => {
-    //             Swal.fire({
-    //                 position: "center",
-    //                 icon: "error",
-    //                 title: "acccount login faild",
-    //                 showConfirmButton: false,
-    //                 timer: 1500
-    //             });
-    //         })
-    // }
+    const handleGoogleLogin = () => {
+        googleSign(googleProvider)
+            .then(res => {
+                setUser(res.user);
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "Welcome, Login Success",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                navigate('/')
+            }).catch(error => {
+                Swal.fire({
+                    position: "center",
+                    icon: "error",
+                    title: "acccount login faild",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            })
+    }
     // handle login email password
     const handleLogin = event => {
         event.preventDefault()
@@ -95,7 +95,7 @@ const Login = () => {
                     <div className="text-center flex gap-2 justify-center">
                         <h1>Login With</h1>
                         <div className="flex gap-x-3">
-                            <button > Google <i className="fa fa-google" aria-hidden="true"></i></button>
+                            <button onClick={handleGoogleLogin}> Google <i className="fa fa-google" aria-hidden="true"></i></button>
                         </div>
                     </div>
                     <CardFooter className="pt-0">

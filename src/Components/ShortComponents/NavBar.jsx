@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
     Navbar,
     MobileNav,
@@ -7,8 +7,19 @@ import {
     IconButton,
 } from "@material-tailwind/react";
 import { Link, NavLink } from "react-router-dom";
+import { Authcontext } from "../providers/AuthProvider";
 
 const NavBar = () => {
+    const { user } = useContext(Authcontext)
+    console.log(user)
+
+    // handle logout
+    const handleLogout = () => {
+
+    }
+
+
+
     const [openNav, setOpenNav] = React.useState(false);
 
     React.useEffect(() => {
@@ -66,24 +77,43 @@ const NavBar = () => {
                     </Typography>
                     <div className="flex items-center gap-4">
                         <div className="mr-4 hidden lg:block">{navList}</div>
-                        <div className="flex items-center gap-x-1">
-                            <Button
-                                variant="text"
-                                size="sm"
-                                className="hidden lg:inline-block"
-                            >
-                                <Link to='/login'
-                                >Log In</Link>
-                            </Button>
-                            <Button
-                                variant="gradient"
-                                size="sm"
-                                className="hidden lg:inline-block"
-                            >
-                                <Link to='/signin'
-                                >sign in</Link>
-                            </Button>
-                        </div>
+                        {
+                            user?.email ? <div className="flex items-center gap-x-1">
+                                <div className="w-10 mx-3 rounded-full" title={user?.displayName}>
+                                    <img
+                                        
+                                        className="w-10 rounded-full"
+                                        alt={user?.displayName}
+                                        src={user?.photoURL}/>
+                                </div>
+                                <Button
+                                    variant="gradient"
+                                    size="sm"
+                                    className="hidden lg:inline-block"
+                                >
+                                    <Link onClick={handleLogout}
+                                    >Log Out</Link>
+                                </Button>
+                            </div> : <div className="flex items-center gap-x-1">
+                                <Button
+                                    variant="text"
+                                    size="sm"
+                                    className="hidden lg:inline-block"
+                                >
+                                    <Link to='/login'
+                                    >Log In</Link>
+                                </Button>
+                                <Button
+                                    variant="gradient"
+                                    size="sm"
+                                    className="hidden lg:inline-block"
+                                >
+                                    <Link to='/signin'
+                                    >sign in</Link>
+                                </Button>
+                            </div>
+                        }
+
                         <IconButton
                             variant="text"
                             className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
@@ -130,7 +160,7 @@ const NavBar = () => {
                             <Link to='/login'>Log In</Link>
                         </Button>
                         <Button fullWidth variant="gradient" size="sm" className="">
-                            <Link>Sign in</Link>
+                            <Link to='signin'>Sign in</Link>
                         </Button>
                     </div>
                 </MobileNav>
