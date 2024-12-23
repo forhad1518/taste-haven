@@ -24,7 +24,7 @@ const FoodCard = ({ food }) => {
                             {food?.foodName}
                         </Typography>
                         <Typography color="blue-gray" className="font-medium">
-                            <span>Purcess: </span>
+                            <span>Purchase: </span>
                         </Typography>
                     </div>
                     <Typography
