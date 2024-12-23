@@ -47,7 +47,7 @@ const NavBar = () => {
                 color="blue-gray"
                 className="p-1 font-normal"
             >
-                <NavLink className="flex items-center">
+                <NavLink to='/allfoods' className="flex items-center">
                     All Foods
                 </NavLink>
             </Typography>

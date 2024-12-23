@@ -7,6 +7,7 @@ import SignUp from "../Pages/SignUp";
 import SingleFood from "../ShortComponents/SingleFood";
 import Purchase from "../ShortComponents/Purchase";
 import axios from "axios";
+import AllFoods from "../Pages/AllFoods";
 
 
 const Router = createBrowserRouter([
@@ -30,12 +31,16 @@ const Router = createBrowserRouter([
             {
                 path: '/details/:id',
                 element: <SingleFood></SingleFood>,
-                loader: ({ params }) => fetch(`http://localhost:5000/details/${params.id}`)
+                loader: ({ params }) => fetch(`https://assignment-11-server-eta-gules.vercel.app/details/${params.id}`)
             },
             {
                 path: '/purchase/:id',
                 element: <Purchase></Purchase>,
-                loader: ({ params }) => axios.get(`http://localhost:5000/details/${params.id}`)
+                loader: ({ params }) => axios.get(`https://assignment-11-server-eta-gules.vercel.app/details/${params.id}`)
+            },
+            {
+                path: 'allfoods',
+                element: <AllFoods></AllFoods>
             }
         ]
     },
