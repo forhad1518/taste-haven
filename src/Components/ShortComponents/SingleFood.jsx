@@ -88,7 +88,7 @@ const SingleFood = () => {
                     <Typography color="gray" className="mb-8 font-normal">
                         {food?.description}
                     </Typography>
-                    <Link className="inline-block">
+                    <Link to={`/purchase/${food?._id}`} className="inline-block">
                         <Button variant="text" className="flex items-center gap-2">
                             Purchase
                             <svg

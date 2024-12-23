@@ -5,6 +5,8 @@ import ErrorPage from "../Pages/ErrorPage";
 import Login from "../Pages/Login";
 import SignUp from "../Pages/SignUp";
 import SingleFood from "../ShortComponents/SingleFood";
+import Purchase from "../ShortComponents/Purchase";
+import axios from "axios";
 
 
 const Router = createBrowserRouter([
@@ -29,6 +31,11 @@ const Router = createBrowserRouter([
                 path: '/details/:id',
                 element: <SingleFood></SingleFood>,
                 loader: ({ params }) => fetch(`http://localhost:5000/details/${params.id}`)
+            },
+            {
+                path: '/purchase/:id',
+                element: <Purchase></Purchase>,
+                loader: ({ params }) => axios.get(`http://localhost:5000/details/${params.id}`)
             }
         ]
     },
