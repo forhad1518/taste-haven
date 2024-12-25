@@ -1,10 +1,14 @@
-import axios from 'axios';
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import FoodCard from '../ShortComponents/FoodCard';
+import { Link } from "react-router-dom";
+import * as React from "react";
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
+import axios from "axios";
+import { ImgLight } from "./ImgLight";
 
-const AllFoods = () => {
-    const [foods, setFoods] = useState(null);
+const Gallary = () => {
+    const [open, setOpen] = React.useState(false);
+
+    const [foods, setFoods] = React.useState(null);
     React.useEffect(() => {
         const loadData = async () => {
             try {
@@ -17,11 +21,11 @@ const AllFoods = () => {
         loadData()
     }, [])
     return (
-        <div>
+        <div className="mb-10">
             <div
                 className='h-80 mb-10 flex justify-center items-center'
                 style={{
-                    backgroundImage: "url(https://images.pexels.com/photos/260922/pexels-photo-260922.jpeg?cs=srgb&dl=pexels-pixabay-260922.jpg&fm=jpg)",
+                    backgroundImage: "url(https://png.pngtree.com/background/20230614/original/pngtree-long-interior-hallway-of-a-restaurant-with-booths-and-tables-picture-image_3494920.jpg)",
                     backgroundRepeat: "no-repeat",
                     backgroundPosition: "center",
                     backgroundSize: "cover"
@@ -51,21 +55,32 @@ const AllFoods = () => {
                                 href="#"
                                 className="px-3 py-1 hover:underline"
                             >
-                                All Foods
+                                Our Gallary
                             </Link>
                         </li>
                     </ol>
                 </nav>
             </div>
-            <div className="w-10/12 mx-auto">
+            <div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {
-                        foods?.map(food => <FoodCard key={food._id} food={food}></FoodCard>)
+                        foods?.map(food => <ImgLight key={food._id} food={food} setOpen={setOpen}></ImgLight>)
                     }
                 </div>
+
+                <div>
+                    <Lightbox
+                        open={open}
+                        close={() => setOpen(false)}
+                        slides={[
+                            { src: "https://png.pngtree.com/background/20230614/original/pngtree-long-interior-hallway-of-a-restaurant-with-booths-and-tables-picture-image_3494920.jpg" },
+
+                        ]}
+                    />
+                </div>
             </div>
-        </div>
+        </div >
     );
 };
 
-export default AllFoods;
+export default Gallary;

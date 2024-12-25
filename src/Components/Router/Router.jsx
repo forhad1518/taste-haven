@@ -8,6 +8,7 @@ import SingleFood from "../ShortComponents/SingleFood";
 import Purchase from "../ShortComponents/Purchase";
 import axios from "axios";
 import AllFoods from "../Pages/AllFoods";
+import Gallary from "../ShortComponents/Gallary";
 
 
 const Router = createBrowserRouter([
@@ -41,7 +42,12 @@ const Router = createBrowserRouter([
             {
                 path: 'allfoods',
                 element: <AllFoods></AllFoods>
-            }
+            },
+            {
+                path: 'gallary',
+                element: <Gallary></Gallary>,
+            },
+
         ]
     },
     {

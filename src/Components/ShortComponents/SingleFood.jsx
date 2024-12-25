@@ -31,7 +31,7 @@ const SingleFood = () => {
                         {food?.foodName}
                     </Typography>
                     <div className="relative flex flex-col w-full mb-4 text-gray-700 bg-white shadow-md rounded-lg bg-clip-border">
-                        <table className="w-full text-left table-auto min-w-max text-slate-800">
+                        <table className=" w-full text-left table-auto text-slate-800">
                             <thead>
                                 <tr className="text-slate-500 border-b border-slate-300 bg-slate-50">
                                     <th className="p-4">
