@@ -11,6 +11,7 @@ import AllFoods from "../Pages/AllFoods";
 import Gallary from "../ShortComponents/Gallary";
 import AddFood from "../privateRoute/AddFood";
 import MyFood from "../privateRoute/MyFood";
+import EditFood from "../privateRoute/EditFood";
 
 
 const Router = createBrowserRouter([
@@ -56,6 +57,11 @@ const Router = createBrowserRouter([
             {
                 path: 'myfoods',
                 element: <MyFood></MyFood>
+            },
+            {
+                path: '/upgrade/:id',
+                element: <EditFood></EditFood>,
+                loader: ({ params }) => fetch(`https://assignment-11-server-eta-gules.vercel.app/details/${params.id}`)
             }
 
         ]

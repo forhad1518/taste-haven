@@ -91,10 +91,12 @@ const AddFood = () => {
                                     <Input type="text" name="category" label="Food Category Name" required />
                                     <Input type="number" name="stock" label="Quantity" required />
                                     <Input type="number" name="price" label="Price" required />
-                                    <Input type="number" name="rating" step="0.1" label="Rating" required />
                                     {/* Read Only */}
                                     <Input type="email" name="email" label="Email" readOnly defaultValue={user?.email} />
                                     <Input type="text" label="name" readOnly name="name" defaultValue={user?.displayName} />
+                                    <div>
+                                        
+                                    </div>
                                     <Textarea name="description" label="Description" required></Textarea>
                                 </div>
                                     {/* Submit BTN */}
