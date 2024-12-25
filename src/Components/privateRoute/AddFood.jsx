@@ -12,36 +12,29 @@ import Lottie from "lottie-react";
 import addProductAnimation from "../animations/addProduct.json"
 import Swal from "sweetalert2";
 import { Authcontext } from "../providers/AuthProvider";
+import axios from "axios";
 
 
 const AddFood = () => {
     const { user } = useContext(Authcontext)
-    const handleAddEquipment = event => {
+
+    const handleAddfood = event => {
         event.preventDefault()
         const form = event.target;
-        const equipmentName = form.equipmentName.value;
-        const photo = form.photo.value;
-        const category = form.category.value;
+        const foodName = form.foodName.value;
+        const foodImage = form.foodImage.value;
+        const foodCategory = form.foodCategory.value;
         const price = form.price.value;
-        const rating = form.rating.value;
-        const customization = form.customization.value === "Choose Extra" ? null : form.customization.value
-        const delivery = form.delivery.value;
-        const stock = form.stock.value;
+        const foodOrigin = form.foodOrigin.value;
+        const quantity = form.quantity.value;
         const email = form.email.value;
         const name = form.name.value;
         const description = form.description.value;
 
-        const equipmentData = { equipmentName, photo, category, price, rating, customization, delivery, stock, email, name, description }
-
-        fetch('https://assignment-10-server-nine-blue.vercel.app//equipments', {
-            method: 'post',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(equipmentData)
-        })
-            .then(res => res.json())
-            .then(data => {
+        const foodData = { foodName, foodImage, foodCategory, price, foodOrigin,  quantity, email, name, description }
+        console.log(foodData)
+        axios.post('http://localhost:5000/foodadd', foodData)
+            .then(() => {
                 let timerInterval;
                 Swal.fire({
                     title: "Added Product!",
@@ -83,20 +76,18 @@ const AddFood = () => {
                             <Lottie className="w-[50px]" animationData={addProductAnimation} loop={true}></Lottie>
                         </div>
                         <CardBody>
-                            <form className="flex flex-col gap-4 items-center" onSubmit={handleAddEquipment}>
+                            <form className="flex flex-col gap-4 items-center" onSubmit={handleAddfood}>
                                 <div className="grid md:grid-cols-2 gap-y-2 gap-x-5 place-items-center">
                                     {/* Input feild */}
-                                    <Input type="text" name="equipmentName" label="Food Name" required />
-                                    <Input type="text" name="photo" label="Photo URL" required />
-                                    <Input type="text" name="category" label="Food Category Name" required />
-                                    <Input type="number" name="stock" label="Quantity" required />
+                                    <Input type="text" name="foodName" label="Food Name" required />
+                                    <Input type="text" name="foodImage" label="Photo URL" required />
+                                    <Input type="text" name="foodCategory" label="Food Category Name" required />
+                                    <Input type="number" name="quantity" label="Quantity" required />
                                     <Input type="number" name="price" label="Price" required />
+                                    <Input type="text" name="foodOrigin" label="Food Origin" required />
                                     {/* Read Only */}
                                     <Input type="email" name="email" label="Email" readOnly defaultValue={user?.email} />
                                     <Input type="text" label="name" readOnly name="name" defaultValue={user?.displayName} />
-                                    <div>
-                                        
-                                    </div>
                                     <Textarea name="description" label="Description" required></Textarea>
                                 </div>
                                     {/* Submit BTN */}

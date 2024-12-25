@@ -8,7 +8,7 @@ const MyFood = () => {
     const [myfoods, setMyFoods] = useState(null);
     console.log(myfoods)
     useEffect(() => {
-        axios.get(`http://localhost:5000/foods/${user?.email}`)
+        axios.get(`https://assignment-11-server-eta-gules.vercel.app/foods/${user?.email}`)
         .then(res => setMyFoods(res.data))
     }, [user?.email])
     return (

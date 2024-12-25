@@ -16,7 +16,7 @@ import { Authcontext } from "../providers/AuthProvider";
 import axios from "axios";
 const EditFood = () => {
     const { user } = useContext(Authcontext)
-    const { foodName, foodImage, foodCategory, price, quantity, email, name, description, _id } = useLoaderData()
+    const { foodName, foodImage, foodCategory, price, quantity, email, foodOrigin, name, description, _id } = useLoaderData()
 
     const handleUpdateEquipment = event => {
         event.preventDefault()
@@ -27,11 +27,12 @@ const EditFood = () => {
         const foodCategory = form.foodCategory.value;
         const price = form.price.value;
         const quantity = form.quantity.value;
+        const foodOrigin = form.foodOrigin.value;
         const email = form.email.value;
         const name = form.name.value;
         const description = form.description.value;
 
-        const foodData = { foodName, foodImage, foodCategory, price, quantity, email, name, description }
+        const foodData = { foodName, foodImage, foodCategory, price, quantity, foodOrigin, email, name, description }
         console.log(foodData)
 
         Swal.fire({
@@ -44,7 +45,7 @@ const EditFood = () => {
             confirmButtonText: "Yes, Update It!"
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.put(`http://localhost:5000/foods/${_id}`, foodData)
+                axios.put(`https://assignment-11-server-eta-gules.vercel.app/foods/${_id}`, foodData)
                     .then(() => {
                         let timerInterval;
                         Swal.fire({
@@ -63,23 +64,23 @@ const EditFood = () => {
                                 clearInterval(timerInterval);
                             }
                         })
-                        .then((result) => {
-                            /* Read more about handling dismissals below */
-                            if (result.dismiss === Swal.DismissReason.timer) {
+                            .then((result) => {
+                                /* Read more about handling dismissals below */
+                                if (result.dismiss === Swal.DismissReason.timer) {
+                                    Swal.fire({
+                                        title: "Updated!",
+                                        text: "Your Update has been Success.",
+                                        icon: "success"
+                                    });
+                                }
+                            })
+                            .catch(() => {
                                 Swal.fire({
-                                    title: "Updated!",
-                                    text: "Your Update has been Success.",
-                                    icon: "success"
+                                    title: "Failde!",
+                                    text: "Your Update has been Failed.",
+                                    icon: "error"
                                 });
-                            }
-                        })
-                        .catch(() => {
-                            Swal.fire({
-                                title: "Failde!",
-                                text: "Your Update has been Failed.",
-                                icon: "error"
-                            });
-                        })
+                            })
                     })
             }
         });
@@ -105,16 +106,17 @@ const EditFood = () => {
                             <form className="flex flex-col gap-4 items-center" onSubmit={handleUpdateEquipment}>
                                 <div className="grid md:grid-cols-2 gap-y-2 gap-x-5 place-items-center">
                                     {/* Input feild */}
-                                    <Input type="text" name="foodName" defaultValue={foodName} label="Equipment Name" required />
-                                    <Input type="text" name="foodImage" defaultValue={foodImage} label="Photo URL" required />
-                                    <Input type="text" name="foodCategory" defaultValue={foodCategory} label="Category Name" required />
+                                    <Input type="text" name="foodName" defaultValue={foodName} label="Food Name" required />
+                                    <Input type="text" name="foodImage" defaultValue={foodImage} label="Food Photo URL" required />
+                                    <Input type="text" name="foodCategory" defaultValue={foodCategory} label="Food Category Name" required />
                                     <Input type="number" name="price" defaultValue={price} label="Price" required />
-                                    <Input type="number" name="quantity" defaultValue={quantity} label="Stock" required />
+                                    <Input type="number" name="quantity" defaultValue={quantity} label="Quantity" required />
+                                    <Input type="text" name="foodOrigin" defaultValue={foodOrigin} label="Food Origin" required />
                                     {/* Read Only */}
                                     <Input type="email" name="email" defaultValue={email} label="Email" readOnly defaultValue={user?.email} />
                                     <Input type="text" label="name" defaultValue={name} readOnly name="name" defaultValue={user?.displayName} />
                                     {/* Submit BTN */}
-                                    <div></div>
+
                                     <Textarea className="col-span-2" name="description" defaultValue={description} label="Description" required></Textarea>
                                 </div>
                                 <Button variant="gradient" fullWidth type="submit" >
