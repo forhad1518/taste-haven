@@ -122,7 +122,7 @@ const EditFood = () => {
                                     <Textarea name="description" defaultValue={description} label="Description" required></Textarea>
                                 </div>
                                 <Button variant="gradient" fullWidth type="submit" >
-                                    Update Product  <i className="fa fa-plus-circle" aria-hidden="true"></i>
+                                    Update Product  <i className="fa-solid fa-pen-to-square"></i>
                                 </Button>
                             </form>
                         </CardBody>

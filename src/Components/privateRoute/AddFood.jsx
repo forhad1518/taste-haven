@@ -1,5 +1,4 @@
 import { useContext } from "react";
-import { Authcontext } from "../Provider/AuthProvider";
 import {
     Card,
     CardBody,
@@ -12,6 +11,7 @@ import {
 import Lottie from "lottie-react";
 import addProductAnimation from "../animations/addProduct.json"
 import Swal from "sweetalert2";
+import { Authcontext } from "../providers/AuthProvider";
 
 
 const AddFood = () => {
@@ -68,9 +68,9 @@ const AddFood = () => {
             })
     }
     return (
-        <div animationData={addProductAnimation} loop={true} className="grid place-items-center p-5"
+        <div animationData={addProductAnimation} loop={true} className="grid place-items-center p-5 mb-10"
             style={{
-                backgroundImage: "url(https://img.freepik.com/premium-photo/mannequin-sports-gear-surrounded-by-basketballs-sports-store-with-helmets_1055425-20178.jpg?semt=ais_hybrid)",
+                backgroundImage: "url(https://res.cloudinary.com/tf-lab/image/upload/restaurant/c6c3df76-0dba-4fe7-9f53-7f165b48e687/d4cd6585-9d11-4306-bbe9-3fe7c935bef0.jpg)",
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover"
             }}
@@ -79,32 +79,27 @@ const AddFood = () => {
                 <div>
                     <Card>
                         <div className="text-center flex justify-center pt-4">
-                            <h1 className="text-3xl font-bold">Add Product!</h1>
+                            <h1 className="text-3xl font-bold">Add Food!</h1>
                             <Lottie className="w-[50px]" animationData={addProductAnimation} loop={true}></Lottie>
                         </div>
                         <CardBody>
                             <form className="flex flex-col gap-4 items-center" onSubmit={handleAddEquipment}>
                                 <div className="grid md:grid-cols-2 gap-y-2 gap-x-5 place-items-center">
                                     {/* Input feild */}
-                                    <Input type="text" name="equipmentName" label="Equipment Name" required />
+                                    <Input type="text" name="equipmentName" label="Food Name" required />
                                     <Input type="text" name="photo" label="Photo URL" required />
-                                    <Input type="text" name="category" label="Category Name" required />
+                                    <Input type="text" name="category" label="Food Category Name" required />
+                                    <Input type="number" name="stock" label="Quantity" required />
                                     <Input type="number" name="price" label="Price" required />
                                     <Input type="number" name="rating" step="0.1" label="Rating" required />
-                                    <Select name="customization" label="Choose Extra">
-                                        <Option>Bat with extra grip</Option>
-                                        <Option>Hit paper</Option>
-                                    </Select>
-                                    <Input type="number" name="delivery" label="Delivery Days" required />
-                                    <Input type="number" name="stock" label="Stock" required />
                                     {/* Read Only */}
                                     <Input type="email" name="email" label="Email" readOnly defaultValue={user?.email} />
                                     <Input type="text" label="name" readOnly name="name" defaultValue={user?.displayName} />
-                                    {/* Submit BTN */}
                                     <Textarea name="description" label="Description" required></Textarea>
                                 </div>
+                                    {/* Submit BTN */}
                                 <Button variant="gradient" fullWidth type="submit" >
-                                    Add Product  <i className="fa fa-plus-circle" aria-hidden="true"></i>
+                                    Add Food  <i className="fa-solid fa-cloud-arrow-up"></i>
                                 </Button>
                             </form>
                         </CardBody>

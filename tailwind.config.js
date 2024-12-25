@@ -10,5 +10,6 @@ export default withMT({
     extend: {},
   },
   plugins: [
+    require('daisyui'),
   ],
 });

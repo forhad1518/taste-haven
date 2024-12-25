@@ -9,6 +9,8 @@ import Purchase from "../ShortComponents/Purchase";
 import axios from "axios";
 import AllFoods from "../Pages/AllFoods";
 import Gallary from "../ShortComponents/Gallary";
+import AddFood from "../privateRoute/AddFood";
+import MyFood from "../privateRoute/MyFood";
 
 
 const Router = createBrowserRouter([
@@ -47,6 +49,14 @@ const Router = createBrowserRouter([
                 path: 'gallary',
                 element: <Gallary></Gallary>,
             },
+            {
+                path: 'addfood',
+                element: <AddFood></AddFood>
+            },
+            {
+                path: 'myfoods',
+                element: <MyFood></MyFood>
+            }
 
         ]
     },

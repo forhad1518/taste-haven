@@ -10,15 +10,12 @@ import { Link, NavLink } from "react-router-dom";
 import { Authcontext } from "../providers/AuthProvider";
 
 const NavBar = () => {
-    const { user, logOut } = useContext(Authcontext)
-    console.log(user)
+    const { user, logOut } = useContext(Authcontext);
 
     // handle logout
     const handleLogout = () => {
         logOut()
     }
-
-
 
     const [openNav, setOpenNav] = React.useState(false);
 
@@ -79,12 +76,37 @@ const NavBar = () => {
                         <div className="mr-4 hidden lg:block">{navList}</div>
                         {
                             user?.email ? <div className="flex items-center gap-x-1">
-                                <div className="w-10 mx-3 rounded-full" title={user?.displayName}>
-                                    <img
-
-                                        className="w-10 rounded-full"
-                                        alt={user?.displayName}
-                                        src={user?.photoURL} />
+                                <div className="dropdown dropdown-end">
+                                    <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                                        <div className="w-10 rounded-full" title={user?.displayName}>
+                                            <img
+                                                alt={user?.displayName}
+                                                src={user?.photoURL} />
+                                        </div>
+                                    </div>
+                                    <ul
+                                        tabIndex={0}
+                                        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                                        <li>
+                                            <Link className="btn btn-outline rounded-b-none">
+                                                My Oders
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link className="btn btn-outline rounded-none"
+                                            to='/myfoods'
+                                            >
+                                                My Foods
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link className="btn btn-outline rounded-t-none"
+                                            to='/addfood'
+                                            >
+                                                Add Food
+                                            </Link>
+                                        </li>
+                                    </ul>
                                 </div>
                                 <Button
                                     variant="gradient"
