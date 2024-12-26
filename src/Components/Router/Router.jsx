@@ -12,12 +12,16 @@ import Gallary from "../ShortComponents/Gallary";
 import AddFood from "../privateRoute/AddFood";
 import MyFood from "../privateRoute/MyFood";
 import EditFood from "../privateRoute/EditFood";
+import PrivatePage from "../privateRoute/PrivatePage";
+import LoadingShow from "../ShortComponents/LoadingShow";
+import { Oders } from "../privateRoute/Oders";
+
 
 
 const Router = createBrowserRouter([
     {
         path: '/',
-        element: <MainLayout></MainLayout>,
+        element: <LoadingShow><MainLayout></MainLayout></LoadingShow>,
         children: [
             {
                 path: '/',
@@ -39,7 +43,7 @@ const Router = createBrowserRouter([
             },
             {
                 path: '/purchase/:id',
-                element: <Purchase></Purchase>,
+                element: <PrivatePage><Purchase></Purchase></PrivatePage>,
                 loader: ({ params }) => axios.get(`https://assignment-11-server-eta-gules.vercel.app/details/${params.id}`)
             },
             {
@@ -52,16 +56,20 @@ const Router = createBrowserRouter([
             },
             {
                 path: 'addfood',
-                element: <AddFood></AddFood>
+                element: <PrivatePage><AddFood></AddFood></PrivatePage>
             },
             {
                 path: 'myfoods',
-                element: <MyFood></MyFood>
+                element: <PrivatePage><MyFood></MyFood></PrivatePage>
             },
             {
                 path: '/upgrade/:id',
                 element: <EditFood></EditFood>,
                 loader: ({ params }) => fetch(`https://assignment-11-server-eta-gules.vercel.app/details/${params.id}`)
+            },
+            {
+                path: 'myoders',
+                element: <PrivatePage><Oders></Oders></PrivatePage>
             }
 
         ]

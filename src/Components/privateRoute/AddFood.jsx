@@ -33,7 +33,7 @@ const AddFood = () => {
 
         const foodData = { foodName, foodImage, foodCategory, price, foodOrigin,  quantity, email, name, description }
         console.log(foodData)
-        axios.post('http://localhost:5000/foodadd', foodData)
+        axios.post('https://assignment-11-server-eta-gules.vercel.app/foodadd', foodData)
             .then(() => {
                 let timerInterval;
                 Swal.fire({

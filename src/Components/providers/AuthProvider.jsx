@@ -14,7 +14,9 @@ const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
 
     // Loading
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(true);
+
+    const [showLoading, setShowLoading] = useState(true);
 
     // Google sign
     const googleSign = provider => {
@@ -52,9 +54,11 @@ const AuthProvider = ({ children }) => {
         logOut,
         signupUserPassword,
         loginEmailpass,
+        setShowLoading,
         // data
         user,
         loading,
+        showLoading
 
 
     }
