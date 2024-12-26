@@ -5,10 +5,20 @@ import {
     Typography,
     Button,
 } from "@material-tailwind/react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { Link, useLoaderData } from 'react-router-dom';
 
 const SingleFood = () => {
     const food = useLoaderData()
+    const [purchase, setPurchase] = useState(0)
+    useEffect(() => {
+        axios.get('http://localhost:5000/pucshase/items')
+            .then(res => {
+                const purchaseCount = res.data.filter(item => item.id === food._id);
+                setPurchase(purchaseCount.length)
+            })
+    }, [])
     return (
         <div className="my-5 w-10/12 mx-auto">
             <Card className="flex-col lg:flex-row">
@@ -25,7 +35,7 @@ const SingleFood = () => {
                 </CardHeader>
                 <CardBody>
                     <Typography variant="h6" color="gray" className="mb-4 uppercase">
-                        Total Purchase:
+                        Total Purchase: {purchase}
                     </Typography>
                     <Typography variant="h4" color="blue-gray" className="mb-2">
                         {food?.foodName}

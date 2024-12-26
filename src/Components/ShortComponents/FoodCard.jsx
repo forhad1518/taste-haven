@@ -6,8 +6,18 @@ import {
     Typography,
     Button,
 } from "@material-tailwind/react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 const FoodCard = ({ food }) => {
+    const [purchase, setPurchase] = useState(0)
+    useEffect(() => {
+        axios.get('http://localhost:5000/pucshase/items')
+        .then(res => {
+            const purchaseCount = res.data.filter(item => item.id === food._id);
+            setPurchase(purchaseCount.length)
+        })
+    },[])
     return (
         <div className="flex justify-center items-center">
             <Card className="max-w-80">
@@ -24,7 +34,7 @@ const FoodCard = ({ food }) => {
                             {food?.foodName}
                         </Typography>
                         <Typography color="blue-gray" className="font-medium">
-                            <span>Purchase: </span>
+                            <span>Purchase: {purchase} </span>
                         </Typography>
                     </div>
                     <Typography
