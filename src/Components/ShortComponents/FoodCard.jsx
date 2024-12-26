@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 const FoodCard = ({ food }) => {
     const [purchase, setPurchase] = useState(0)
     useEffect(() => {
-        axios.get('http://localhost:5000/pucshase/items')
+        axios.get('https://assignment-11-server-eta-gules.vercel.app/pucshase/items')
         .then(res => {
             const purchaseCount = res.data.filter(item => item.id === food._id);
             setPurchase(purchaseCount.length)

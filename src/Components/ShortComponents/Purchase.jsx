@@ -24,7 +24,7 @@ const Purchase = () => {
         const email = form.email.value;
 
         const purchaseData = { id, quantity, name, email };
-        axios.post('http://localhost:5000/purchase', purchaseData)
+        axios.post('https://assignment-11-server-eta-gules.vercel.app/purchase', purchaseData)
             .then(res => {
                 console.log(res.data)
                 Swal.fire({
