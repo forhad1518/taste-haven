@@ -99,7 +99,7 @@ const SingleFood = () => {
                         {food?.description}
                     </Typography>
                     {
-                        food?.quantity === 0 ? <h1 className="text-red-600 font-bold">Sorry! he/she stock not is available</h1> : <Link to={`/purchase/${food?._id}`} className="inline-block">
+                        food?.quantity === 0 ? <h1 className="text-red-600 font-bold">Sorry! Sir/Medam stock not is available</h1> : <Link to={`/purchase/${food?._id}`} className="inline-block">
                             <Button variant="text" className="flex items-center gap-2">
                                 Purchase
                                 <svg

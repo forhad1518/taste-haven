@@ -10,64 +10,55 @@ import {
     IconButton,
     Tooltip,
 } from "@material-tailwind/react";
+import axios from "axios";
+import { useContext, useEffect, useState } from "react";
+import { Authcontext } from "../providers/AuthProvider";
+import Swal from "sweetalert2";
 
-
-const TABLE_HEAD = ["Food", "Added By", "Date ", "Food Owner", "Action"];
-
-const TABLE_ROWS = [
-    {
-        img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-3.jpg",
-        name: "John Michael",
-        email: "john@creative-tim.com",
-        job: "Manager",
-        org: "Organization",
-        online: true,
-        date: "23/04/18",
-    },
-    {
-        img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-2.jpg",
-        name: "Alexa Liras",
-        email: "alexa@creative-tim.com",
-        job: "Programator",
-        org: "Developer",
-        online: false,
-        date: "23/04/18",
-    },
-    {
-        img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-1.jpg",
-        name: "Laurent Perrier",
-        email: "laurent@creative-tim.com",
-        job: "Executive",
-        org: "Projects",
-        online: false,
-        date: "19/09/17",
-    },
-    {
-        img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-4.jpg",
-        name: "Michael Levi",
-        email: "michael@creative-tim.com",
-        job: "Programator",
-        org: "Developer",
-        online: true,
-        date: "24/12/08",
-    },
-    {
-        img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-5.jpg",
-        name: "Richard Gran",
-        email: "richard@creative-tim.com",
-        job: "Manager",
-        org: "Executive",
-        online: false,
-        date: "04/10/21",
-    },
-];
 
 export function Oders() {
+    const { user } = useContext(Authcontext);
+    const [order, setOrder] = useState(null)
+    const [orderId, setOrderId] = useState(null)
+    useEffect(() => {
+        axios.get(`http://localhost:5000/myorders/${user?.email}`)
+            .then(res => {
+                setOrder(res?.data?.orderFood)
+                setOrderId(res?.data?.orderid)
+            })
+    }, [])
+    const TABLE_HEAD = ["Food", "Price", "Date ", "Food Owner", "Action"];
+
+    const hanldeDelete = (id) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.delete(`http://localhost:5000/myorders/${id}`)
+                    .then(() => {
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: "Your file has been deleted.",
+                            icon: "success"
+                        });
+                        const remainOrders = order.filter(order => order._id !== id);
+                        setOrder(remainOrders)
+                    })
+            }
+        });
+
+    }
     return (
         <div className="mb-10">
             <Card className="h-full w-full">
 
-                <CardBody className="overflow-scroll px-0">
+                <CardBody className="overflow-scroll px-0 w-10/12 mx-auto">
                     <table className="mt-4 w-full min-w-max table-auto text-left">
                         <thead>
                             <tr>
@@ -88,44 +79,39 @@ export function Oders() {
                             </tr>
                         </thead>
                         <tbody>
-                            {TABLE_ROWS.map(
-                                ({ img, name, email, org, online, date }, index) => {
-                                    const isLast = index === TABLE_ROWS.length - 1;
+                            {order?.map(
+                                ({ foodName, foodImage, foodCategory, email, price, _id }, index) => {
+                                    const isLast = index === order.length - 1;
                                     const classes = isLast
                                         ? "p-4"
                                         : "p-4 border-b border-blue-gray-50";
 
                                     return (
-                                        <tr key={name}>
+                                        <tr key={foodName}>
                                             <td className={classes}>
                                                 <div className="flex items-center gap-3">
-                                                    <Avatar src={img} alt={name} size="sm" />
+                                                    <Avatar src={foodImage} alt={foodName} size="sm" />
                                                     <div className="flex flex-col">
                                                         <Typography
                                                             variant="small"
                                                             color="blue-gray"
                                                             className="font-normal"
                                                         >
-                                                            {name}
+                                                            {foodName}
                                                         </Typography>
                                                         <Typography
                                                             variant="small"
                                                             color="blue-gray"
                                                             className="font-normal opacity-70"
                                                         >
-                                                            {email}
+                                                            {foodCategory}
                                                         </Typography>
                                                     </div>
                                                 </div>
                                             </td>
                                             <td className={classes}>
                                                 <div className="w-max">
-                                                    <Chip
-                                                        variant="ghost"
-                                                        size="sm"
-                                                        value={online ? "online" : "offline"}
-                                                        color={online ? "green" : "blue-gray"}
-                                                    />
+                                                    <p> $ {price}</p>
                                                 </div>
                                             </td>
                                             <td className={classes}>
@@ -134,7 +120,7 @@ export function Oders() {
                                                     color="blue-gray"
                                                     className="font-normal"
                                                 >
-                                                    {date}
+                                                    12/16/2024
                                                 </Typography>
                                             </td>
                                             <td className={classes}>
@@ -143,13 +129,14 @@ export function Oders() {
                                                     color="blue-gray"
                                                     className="font-normal"
                                                 >
-                                                    {date}
+
+                                                    {email}
                                                 </Typography>
                                             </td>
                                             <td className={classes}>
                                                 <Tooltip content="Delete">
-                                                    <IconButton variant="text">
-                                                        <PencilIcon className="h-4 w-4" />
+                                                    <IconButton onClick={() => hanldeDelete(_id)} variant="text">
+                                                        <i className="fa-solid fa-trash text-red-600"></i>
                                                     </IconButton>
                                                 </Tooltip>
                                             </td>
