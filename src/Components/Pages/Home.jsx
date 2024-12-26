@@ -1,3 +1,4 @@
+import Booking from "../ShortComponents/Booking";
 import Slide from "../ShortComponents/Slide";
 import TopFood from "../ShortComponents/TopFood";
 
@@ -11,6 +12,12 @@ const Home = () => {
             {/* top product */}
             <section className="w-10/12 mx-auto">
                 <TopFood></TopFood>
+            </section>
+            <br />
+            <hr />
+            {/* Booking Our Hotel */}
+            <section>
+                <Booking></Booking>
             </section>
         </div>
     );

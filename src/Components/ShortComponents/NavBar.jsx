@@ -68,7 +68,7 @@ const NavBar = () => {
                     <Typography
                         as="a"
                         href="#"
-                        className="mr-4 cursor-pointer py-1.5 font-medium"
+                        className="mr-4 text-xl md:text-2xl lg:text-3xl font-bold cursor-pointer py-1.5 "
                     >
                         Taste Haven
                     </Typography>

@@ -29,9 +29,9 @@ const TopFood = () => {
     }, [])
     return (
         <div>
-            <div>
-                <h1>Top Foods</h1>
-                <p>Taste Haven Restaurant serve best product for you.</p>
+            <div className="text-center py-5">
+                <h1 className="text-xl md:text-2xl lg:text-3xl font-bold mb-5">Top Foods</h1>
+                <p className="text-gray-700">Taste Haven Restaurant serve best product for you.</p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {

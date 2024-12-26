@@ -4,8 +4,6 @@ import {
     CardBody,
     Input,
     Button,
-    Select,
-    Option,
     Textarea,
 } from "@material-tailwind/react";
 import Lottie from "lottie-react";
