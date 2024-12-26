@@ -8,8 +8,8 @@ const MyFood = () => {
     const [myfoods, setMyFoods] = useState(null);
     console.log(myfoods)
     useEffect(() => {
-        axios.get(`https://assignment-11-server-eta-gules.vercel.app/foods/${user?.email}`)
-        .then(res => setMyFoods(res.data))
+        axios.get(`https://assignment-11-server-eta-gules.vercel.app/foods/${user?.email}`, { withCredentials: true })
+            .then(res => setMyFoods(res.data))
     }, [user?.email])
     return (
         <div>

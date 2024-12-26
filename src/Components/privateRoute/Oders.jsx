@@ -20,7 +20,7 @@ export function Oders() {
     const [order, setOrder] = useState(null)
     const [orderId, setOrderId] = useState(null)
     useEffect(() => {
-        axios.get(`http://localhost:5000/myorders/${user?.email}`, { withCredentials: true })
+        axios.get(`https://assignment-11-server-eta-gules.vercel.app/myorders/${user?.email}`, { withCredentials: true })
             .then(res => {
                 setOrder(res?.data?.orderFood)
                 setOrderId(res?.data?.orderid)
