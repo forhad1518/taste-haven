@@ -1,4 +1,4 @@
-
+import axios from "axios";
 import { createContext, useEffect, useState } from 'react';
 import { auth } from '../../firebaseAuth/firebase.config';
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth';
@@ -43,6 +43,22 @@ const AuthProvider = ({ children }) => {
         const unSuscribe = onAuthStateChanged(auth, currentUser => {
             setLoading(false);
             setUser(currentUser)
+
+            const user = { email: currentUser?.email }
+            if (currentUser?.email) {
+                axios.post('http://localhost:5000/jwt', user, { withCredentials: true })
+                    .then(res => {
+                        console.log(res.data)
+                        setLoading(false);
+                    })
+            }
+            else {
+                axios.post('http://localhost:5000/logout', {}, { withCredentials: true })
+                    .then(res => {
+                        console.log(res.data)
+                        setLoading(false);
+                    })
+            }
         })
         return () => unSuscribe()
     }, [])

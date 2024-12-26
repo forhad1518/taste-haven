@@ -20,7 +20,7 @@ export function Oders() {
     const [order, setOrder] = useState(null)
     const [orderId, setOrderId] = useState(null)
     useEffect(() => {
-        axios.get(`https://assignment-11-server-eta-gules.vercel.app/myorders/${user?.email}`)
+        axios.get(`http://localhost:5000/myorders/${user?.email}`, { withCredentials: true })
             .then(res => {
                 setOrder(res?.data?.orderFood)
                 setOrderId(res?.data?.orderid)
@@ -135,7 +135,7 @@ export function Oders() {
                                             <td className={classes}>
                                                 <Tooltip content="Delete">
                                                     <IconButton onClick={() => hanldeDelete(_id)} variant="text">
-                                                      <i className="fa-solid fa-trash text-red-600"></i> Delete
+                                                        <i className="fa-solid fa-trash text-red-600"></i> Delete
                                                     </IconButton>
                                                 </Tooltip>
                                             </td>
