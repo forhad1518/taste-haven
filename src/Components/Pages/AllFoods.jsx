@@ -30,8 +30,7 @@ const AllFoods = () => {
             food.foodName.toLowerCase().includes(searchText.toLowerCase()) // কেস ইনসেন্সিটিভ ফিল্টার
         );
         setSearchItems(result)
-        
-    }, [searchText, searchItems])
+    }, [searchText])
     return (
         <div>
             <div

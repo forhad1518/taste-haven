@@ -1,11 +1,12 @@
+import Slide from "../ShortComponents/Slide";
 import TopFood from "../ShortComponents/TopFood";
 
 const Home = () => {
     return (
-        <div className="my-[60px]">
+        <div className="mb-[60px]">
             {/* Hero Section */}
             <section>
-                Hero
+                <Slide></Slide>
             </section>
             {/* top product */}
             <section className="w-10/12 mx-auto">
