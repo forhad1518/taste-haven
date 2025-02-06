@@ -1,7 +1,7 @@
 # Taste Haven
 
 ## Project Overview
-"This repository contains the source code for a sports item e-commerce website. The platform allows users to browse and purchase various sports equipment and accessories. The website features a user-friendly interface, efficient product management, and a secure checkout process, providing an excellent shopping experience for sports enthusiasts."
+"This repository hosts the code for Taste Haven, a food restaurant website. The site offers an interactive menu for customers to explore a variety of dishes, place online orders, and learn more about the restaurant’s services and location. With a user-friendly design and responsive features, Taste Haven delivers a smooth and enjoyable dining experience for all food enthusiasts."
 
 ## Features
 - **React 18:** Highly performant and flexible UI components.
