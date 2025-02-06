@@ -1,4 +1,4 @@
-# Game Vault
+# Taste Haven
 
 ## Project Overview
 "This repository contains the source code for a sports item e-commerce website. The platform allows users to browse and purchase various sports equipment and accessories. The website features a user-friendly interface, efficient product management, and a secure checkout process, providing an excellent shopping experience for sports enthusiasts."
